@@ -1,1 +1,255 @@
+import pandas as pd
+import numpy as np
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import LabelEncoder
 
+# =====================
+# LOAD DATA
+# =====================
+
+df = pd.read_csv("Astram event data_anonymized.csv")
+
+# =====================
+# DATETIME FEATURES
+# =====================
+
+df['start_datetime'] = pd.to_datetime(df['start_datetime'])
+df['end_datetime'] = pd.to_datetime(df['end_datetime'])
+
+df['hour'] = df['start_datetime'].dt.hour
+df['day'] = df['start_datetime'].dt.dayofweek
+df['month'] = df['start_datetime'].dt.month
+df['week'] = df['start_datetime'].dt.isocalendar().week
+
+df['is_weekend'] = df['day'].isin([5,6]).astype(int)
+
+df['is_peak_hour'] = df['hour'].isin(
+    [7,8,9,10,17,18,19,20]
+).astype(int)
+
+# =====================
+# DURATION
+# =====================
+
+df['duration_hr'] = (
+    df['end_datetime'] - df['start_datetime']
+).dt.total_seconds()/3600
+
+df['duration_hr'] = df['duration_hr'].fillna(
+    df['duration_hr'].median()
+)
+
+# =====================
+# EVENT FREQUENCY
+# =====================
+
+junction_freq = (
+    df.groupby('junction')
+      .size()
+      .reset_index(name='junction_event_frequency')
+)
+
+df = df.merge(
+    junction_freq,
+    on='junction',
+    how='left'
+)
+
+# =====================
+# AVG PRIORITY PER JUNCTION
+# =====================
+
+priority_map = {
+    'low':1,
+    'medium':2,
+    'high':3
+}
+
+df['priority_num'] = (
+    df['priority']
+    .astype(str)
+    .str.lower()
+    .map(priority_map)
+)
+
+avg_priority = (
+    df.groupby('junction')['priority_num']
+      .mean()
+      .reset_index()
+      .rename(
+          columns={
+              'priority_num':
+              'junction_avg_priority'
+          }
+      )
+)
+
+df = df.merge(
+    avg_priority,
+    on='junction',
+    how='left'
+)
+
+# =====================
+# DBSCAN HOTSPOTS
+# =====================
+
+coords = df[['latitude','longitude']]
+
+db = DBSCAN(
+    eps=0.01,
+    min_samples=5
+)
+
+df['cluster_id'] = db.fit_predict(coords)
+
+# =====================
+# CLUSTER EVENT COUNT
+# =====================
+
+cluster_events = (
+    df.groupby('cluster_id')
+      .size()
+      .reset_index(
+          name='cluster_event_count'
+      )
+)
+
+df = df.merge(
+    cluster_events,
+    on='cluster_id',
+    how='left'
+)
+
+# =====================
+# ROAD CLOSURE RATE
+# =====================
+
+closure_rate = (
+    df.groupby('junction')['road_closure']
+      .mean()
+      .reset_index()
+      .rename(
+          columns={
+              'road_closure':
+              'junction_closure_rate'
+          }
+      )
+)
+
+df = df.merge(
+    closure_rate,
+    on='junction',
+    how='left'
+)
+
+# =====================
+# TRAFFIC VULNERABILITY INDEX
+# =====================
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+
+df['freq_scaled'] = scaler.fit_transform(
+    df[['junction_event_frequency']]
+)
+
+df['priority_scaled'] = scaler.fit_transform(
+    df[['junction_avg_priority']]
+)
+
+df['closure_scaled'] = scaler.fit_transform(
+    df[['junction_closure_rate']]
+)
+
+df['TVI'] = (
+    0.4*df['freq_scaled']
+    +0.3*df['priority_scaled']
+    +0.3*df['closure_scaled']
+)
+
+df['TVI'] = df['TVI']*100
+
+# =====================
+# EVENT IMPACT INDEX
+# =====================
+
+event_weight = {
+    'accident':10,
+    'protest':10,
+    'public_event':8,
+    'procession':8,
+    'vip_movement':7,
+    'construction':5,
+    'vehicle_breakdown':3,
+    'water_logging':6
+}
+
+df['event_weight'] = (
+    df['event_cause']
+    .astype(str)
+    .str.lower()
+    .map(event_weight)
+)
+
+df['event_weight'] = df['event_weight'].fillna(5)
+
+df['EII'] = (
+      df['event_weight']
+    + df['priority_num']*5
+    + df['road_closure']*10
+    + df['duration_hr']*2
+)
+
+# =====================
+# LABEL ENCODING
+# =====================
+
+cat_cols = [
+    'zone',
+    'junction',
+    'corridor',
+    'event_type',
+    'event_cause'
+]
+
+for col in cat_cols:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(
+        df[col].astype(str)
+    )
+
+# =====================
+# FINAL FEATURES
+# =====================
+
+features = [
+    'hour',
+    'day',
+    'month',
+    'is_weekend',
+    'is_peak_hour',
+
+    'duration_hr',
+
+    'zone',
+    'junction',
+    'corridor',
+
+    'event_type',
+    'event_cause',
+
+    'road_closure',
+
+    'junction_event_frequency',
+    'junction_avg_priority',
+
+    'cluster_id',
+    'cluster_event_count',
+
+    'TVI',
+    'EII'
+]
+
+X = df[features]
