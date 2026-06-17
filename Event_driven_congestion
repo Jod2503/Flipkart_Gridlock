@@ -3,15 +3,9 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import LabelEncoder
 
-# =====================
-# LOAD DATA
-# =====================
 
 df = pd.read_csv("Astram event data_anonymized.csv")
 
-# =====================
-# DATETIME FEATURES
-# =====================
 
 df['start_datetime'] = pd.to_datetime(df['start_datetime'])
 df['end_datetime'] = pd.to_datetime(df['end_datetime'])
@@ -27,9 +21,6 @@ df['is_peak_hour'] = df['hour'].isin(
     [7,8,9,10,17,18,19,20]
 ).astype(int)
 
-# =====================
-# DURATION
-# =====================
 
 df['duration_hr'] = (
     df['end_datetime'] - df['start_datetime']
@@ -39,9 +30,6 @@ df['duration_hr'] = df['duration_hr'].fillna(
     df['duration_hr'].median()
 )
 
-# =====================
-# EVENT FREQUENCY
-# =====================
 
 junction_freq = (
     df.groupby('junction')
@@ -55,9 +43,7 @@ df = df.merge(
     how='left'
 )
 
-# =====================
-# AVG PRIORITY PER JUNCTION
-# =====================
+
 
 priority_map = {
     'low':1,
@@ -90,9 +76,6 @@ df = df.merge(
     how='left'
 )
 
-# =====================
-# DBSCAN HOTSPOTS
-# =====================
 
 coords = df[['latitude','longitude']]
 
@@ -103,9 +86,7 @@ db = DBSCAN(
 
 df['cluster_id'] = db.fit_predict(coords)
 
-# =====================
-# CLUSTER EVENT COUNT
-# =====================
+
 
 cluster_events = (
     df.groupby('cluster_id')
@@ -121,9 +102,6 @@ df = df.merge(
     how='left'
 )
 
-# =====================
-# ROAD CLOSURE RATE
-# =====================
 
 closure_rate = (
     df.groupby('junction')['road_closure']
@@ -143,9 +121,7 @@ df = df.merge(
     how='left'
 )
 
-# =====================
-# TRAFFIC VULNERABILITY INDEX
-# =====================
+
 
 from sklearn.preprocessing import MinMaxScaler
 
@@ -171,9 +147,7 @@ df['TVI'] = (
 
 df['TVI'] = df['TVI']*100
 
-# =====================
-# EVENT IMPACT INDEX
-# =====================
+
 
 event_weight = {
     'accident':10,
@@ -202,9 +176,6 @@ df['EII'] = (
     + df['duration_hr']*2
 )
 
-# =====================
-# LABEL ENCODING
-# =====================
 
 cat_cols = [
     'zone',
@@ -220,9 +191,6 @@ for col in cat_cols:
         df[col].astype(str)
     )
 
-# =====================
-# FINAL FEATURES
-# =====================
 
 features = [
     'hour',
