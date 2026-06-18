@@ -1,24 +1,14 @@
 [theme]
 base = "dark"
 
-# Accent color (buttons, sliders, links)
-primaryColor = "#3B82F6"
+primaryColor = "#10B981"
 
-# Main page background
 backgroundColor = "#0F172A"
 
-# Sidebar, cards, containers
 secondaryBackgroundColor = "#1E293B"
 
-# Text color
 textColor = "#F8FAFC"
 
-# Font
 font = "sans serif"
-
-[browser]
-gatherUsageStats = false
-
-[server]
 headless = true
 runOnSave = true
