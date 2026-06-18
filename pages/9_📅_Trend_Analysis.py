@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.set_page_config(layout="wide")
 
-st.title("📅 Trend Analysis")
+st.title("Trend Analysis")
 
 df = pd.read_csv(
 "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
