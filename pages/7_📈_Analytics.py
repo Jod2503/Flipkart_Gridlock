@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.set_page_config(layout="wide")
 
-st.title("📈 Analytics")
+st.title("Analytics")
 
 df = pd.read_csv(
 "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
