@@ -73,7 +73,7 @@ if st.button("Predict"):
 
 })
 
-    pred=model.predict(X)[0]
+    pred = str(model.predict(X)[0]).strip()
 
     probs=model.predict_proba(X)[0]
 
