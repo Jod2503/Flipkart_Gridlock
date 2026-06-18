@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 
 st.set_page_config(layout="wide")
 
-st.title("🔥 Congestion Hotspot Heatmap")
+st.title("Congestion Hotspot Heatmap")
 
 df = pd.read_csv(
     "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
