@@ -111,7 +111,7 @@ resource_map = {
 pred = str(pred).strip()
 
 officers, barricades = resource_map.get(pred, (0, 0))
-    }
+    
 
     officers,barricades=resource_map[pred]
 
