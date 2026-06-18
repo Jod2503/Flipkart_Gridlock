@@ -5,7 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 
 st.set_page_config(layout="wide")
 
-st.title("🔍 Similar Event Search")
+st.title("Similar Event Search")
 
 df = pd.read_csv(
     "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
