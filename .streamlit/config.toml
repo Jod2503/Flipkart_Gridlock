@@ -1,14 +1,23 @@
 [theme]
-base = "dark"
+base = "light"
 
-primaryColor = "#10B981"
+# Accent color
+primaryColor = "#0F766E"
 
-backgroundColor = "#0F172A"
+# Main background
+backgroundColor = "#F8FAFC"
 
-secondaryBackgroundColor = "#1E293B"
+# Cards/sidebar
+secondaryBackgroundColor = "#E2E8F0"
 
-textColor = "#F8FAFC"
+# Text
+textColor = "#111827"
 
 font = "sans serif"
+
+[browser]
+gatherUsageStats = false
+
+[server]
 headless = true
 runOnSave = true
