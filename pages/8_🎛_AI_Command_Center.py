@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 
-st.title("🎛 AI Command Center")
+st.title("AI Command Center")
 
 df = pd.read_csv(
 "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
