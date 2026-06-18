@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("🚓 Resource Planner")
+st.title("Resource Planner")
 
 risk = st.selectbox(
     "Risk Level",
