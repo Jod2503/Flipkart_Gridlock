@@ -47,7 +47,8 @@ section[data-testid="stSidebar"] {
 
 /* Buttons */
 div.stButton > button {
-    background-color: #2563EB;
+    background-color: #10B981;
+}
     color: white;
     border-radius: 12px;
     border: none;
