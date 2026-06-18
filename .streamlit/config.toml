@@ -1,9 +1,19 @@
 [theme]
-base = "light"
-primaryColor = "#2563EB"
-backgroundColor = "#F8FAFC"
-secondaryBackgroundColor = "#E2E8F0"
-textColor = "#111827"
+base = "dark"
+
+# Accent color (buttons, sliders, links)
+primaryColor = "#3B82F6"
+
+# Main page background
+backgroundColor = "#0F172A"
+
+# Sidebar, cards, containers
+secondaryBackgroundColor = "#1E293B"
+
+# Text color
+textColor = "#F8FAFC"
+
+# Font
 font = "sans serif"
 
 [browser]
