@@ -101,14 +101,12 @@ if st.button("Predict"):
         use_container_width=True
     )
 
-    resource_map={
-
-        "Low":(2,1),
-        "Medium":(5,3),
-        "High":(10,6),
-        "Critical":(15,10)
-
-    }
+    resource_map = {
+    "Low": (2,1),
+    "Medium": (5,3),
+    "High": (10,6),
+    "Critical": (15,10)
+}
 
     officers, barricades = resource_map.get(pred, (0,0))
 
