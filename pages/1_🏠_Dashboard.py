@@ -4,7 +4,7 @@ import plotly.express as px
 
 import streamlit as st
 from style import local_css
-
+import plot_theme
 st.set_page_config(layout="wide")
 
 local_css()
