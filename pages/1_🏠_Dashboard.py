@@ -5,82 +5,61 @@ import plotly.express as px
 st.markdown("""
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /* Main title */
 h1 {
     font-size: 42px !important;
     font-weight: 700 !important;
-    color: #0F172A;
+    color: #111827;
+    letter-spacing: -1px;
 }
 
 /* Section titles */
 h2 {
     font-size: 30px !important;
     font-weight: 700 !important;
-    color: #1E293B;
+    color: #1F2937;
 }
 
 h3 {
     font-size: 24px !important;
     font-weight: 600 !important;
-    color: #334155;
+    color: #374151;
 }
 
 /* General text */
-p, label {
-    font-size: 17px !important;
-    font-weight: 500 !important;
+p, label, div {
+    font-size: 16px !important;
+    font-weight: 500;
 }
 
 /* Metric cards */
 div[data-testid="stMetric"] {
     background-color: white;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #E5E7EB;
     padding: 22px;
-    border-radius: 18px;
-    box-shadow: 0px 3px 10px rgba(0,0,0,0.06);
-}
-
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background-color: #EEF2FF;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 /* Buttons */
 div.stButton > button {
     background-color: #0F766E;
     color: white;
-    border-radius: 14px;
-    border: none;
-    height: 3.2em;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-/* Inputs */
-div[data-baseweb="select"] {
-    border-radius: 10px;
-}
-
-/* Dataframes */
-thead tr th {
-    font-size: 16px !important;
-}
-
-/* Tabs */
-button[data-baseweb="tab"] {
     font-size: 16px;
     font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    height: 3.1em;
 }
 
 </style>
 """, unsafe_allow_html=True)
-
 st.set_page_config(layout="wide")
 
 df = pd.read_csv(
