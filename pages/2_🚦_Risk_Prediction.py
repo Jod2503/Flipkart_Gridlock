@@ -113,7 +113,6 @@ pred = str(pred).strip()
 officers, barricades = resource_map.get(pred, (0, 0))
     
 
-    officers,barricades=resource_map[pred]
 
     c1,c2=st.columns(2)
 
