@@ -110,7 +110,7 @@ if st.button("Predict"):
 
     }
 
-    officers,barricades=resource_map[pred]
+    officers, barricades = resource_map.get(pred, (0,0))
 
     c1,c2=st.columns(2)
 
