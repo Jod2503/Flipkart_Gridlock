@@ -1,24 +1,14 @@
 [theme]
 base = "light"
-
-# Main accent color (buttons, sliders, checkboxes)
 primaryColor = "#2563EB"
-
-# Page background
 backgroundColor = "#F8FAFC"
-
-# Sidebar and cards background
 secondaryBackgroundColor = "#E2E8F0"
-
-# Text color
-textColor = "#0F172A"
-
-# Font
+textColor = "#111827"
 font = "sans serif"
+
+[browser]
+gatherUsageStats = false
 
 [server]
 headless = true
 runOnSave = true
-
-[browser]
-gatherUsageStats = false
