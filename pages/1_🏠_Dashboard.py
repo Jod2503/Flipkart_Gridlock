@@ -5,55 +5,60 @@ import plotly.express as px
 st.markdown("""
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Main title */
 h1 {
-    font-size: 38px !important;
+    font-size: 42px !important;
     font-weight: 700 !important;
-    color: #F8FAFC;
+    color: #0F172A;
 }
 
-/* Section headings */
+/* Section titles */
 h2 {
-    font-size: 28px !important;
-    font-weight: 600 !important;
-    color: #E2E8F0;
+    font-size: 30px !important;
+    font-weight: 700 !important;
+    color: #1E293B;
 }
 
 h3 {
-    font-size: 22px !important;
+    font-size: 24px !important;
     font-weight: 600 !important;
-    color: #CBD5E1;
+    color: #334155;
+}
+
+/* General text */
+p, label {
+    font-size: 17px !important;
+    font-weight: 500 !important;
 }
 
 /* Metric cards */
 div[data-testid="stMetric"] {
-    background-color: #1E293B;
-    border: 1px solid #334155;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.4);
+    background-color: white;
+    border: 1px solid #E2E8F0;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.06);
 }
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background-color: #111827;
+    background-color: #EEF2FF;
 }
 
 /* Buttons */
 div.stButton > button {
-    background-color: #10B981;
-}
+    background-color: #0F766E;
     color: white;
-    border-radius: 12px;
+    border-radius: 14px;
     border: none;
-    height: 3em;
-    font-size: 16px;
+    height: 3.2em;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -62,13 +67,15 @@ div[data-baseweb="select"] {
     border-radius: 10px;
 }
 
-/* Tables */
+/* Dataframes */
 thead tr th {
-    font-size: 15px !important;
+    font-size: 16px !important;
 }
 
-p, label {
-    font-size: 16px !important;
+/* Tabs */
+button[data-baseweb="tab"] {
+    font-size: 16px;
+    font-weight: 600;
 }
 
 </style>
