@@ -1,23 +1,34 @@
 [theme]
+
+# Use light mode
 base = "light"
 
-# Accent color
+# Deep teal accent color
 primaryColor = "#0F766E"
 
-# Main background
+# Main page background
 backgroundColor = "#F8FAFC"
 
-# Cards/sidebar
+# Sidebar and card containers
 secondaryBackgroundColor = "#E2E8F0"
 
-# Text
+# Text color
 textColor = "#111827"
 
+# Streamlit font (actual custom font comes from CSS)
 font = "sans serif"
 
+
 [browser]
+
+# Disable analytics
 gatherUsageStats = false
 
+
 [server]
+
+# For Streamlit Cloud deployment
 headless = true
+
+# Auto refresh on save
 runOnSave = true
