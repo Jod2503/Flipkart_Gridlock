@@ -4,7 +4,7 @@ import joblib
 import plotly.express as px
 
 model=joblib.load("risk_classifier.pkl")
-import plot_theme
+
 st.title("🚦 Risk Prediction")
 
 lat=st.number_input(
@@ -73,7 +73,7 @@ if st.button("Predict"):
 
 })
 
-    pred = str(model.predict(X)[0]).strip()
+    pred=model.predict(X)[0]
 
     probs=model.predict_proba(X)[0]
 
@@ -101,18 +101,16 @@ if st.button("Predict"):
         use_container_width=True
     )
 
-resource_map = {
-    "Low": (2, 1),
-    "Medium": (5, 3),
-    "High": (10, 6),
-    "Critical": (15, 10)
-}
+    resource_map={
 
-pred = str(pred).strip()
+        "Low":(2,1),
+        "Medium":(5,3),
+        "High":(10,6),
+        "Critical":(15,10)
 
-officers, barricades = resource_map.get(pred, (0, 0))
-    
+    }
 
+    officers,barricades=resource_map[pred]
 
     c1,c2=st.columns(2)
 
