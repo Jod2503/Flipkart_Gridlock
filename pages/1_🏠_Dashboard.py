@@ -49,7 +49,9 @@ div[data-testid="stMetric"] {
 
 /* Buttons */
 div.stButton > button {
-    background-color: #0F766E;
+    background-color: #4F46E5;
+    color: white;
+}
     color: white;
     font-size: 16px;
     font-weight: 600;
