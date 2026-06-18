@@ -63,6 +63,12 @@ div.stButton > button {
 </style>
 """, unsafe_allow_html=True)
 st.set_page_config(layout="wide")
+div.stButton > button {
+    background-color: #B91C1C;
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+}
 
 df = pd.read_csv(
 "Astram event data_anonymized - Astram event data_anonymizedb40ac87.csv"
