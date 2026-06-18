@@ -4,7 +4,7 @@ import joblib
 import plotly.express as px
 
 model=joblib.load("risk_classifier.pkl")
-
+import plot_theme
 st.title("🚦 Risk Prediction")
 
 lat=st.number_input(
