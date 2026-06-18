@@ -2,72 +2,70 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(
-    page_title="Event Congestion Intelligence System",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 st.markdown("""
 <style>
 
-/* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Entire app */
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
 }
 
 /* Main title */
 h1 {
-    font-size: 40px !important;
+    font-size: 38px !important;
     font-weight: 700 !important;
-    color: #111827;
+    color: #F8FAFC;
 }
 
-/* Subtitles */
+/* Section headings */
 h2 {
     font-size: 28px !important;
     font-weight: 600 !important;
+    color: #E2E8F0;
 }
 
-/* Smaller headings */
 h3 {
     font-size: 22px !important;
     font-weight: 600 !important;
+    color: #CBD5E1;
 }
 
 /* Metric cards */
 div[data-testid="stMetric"] {
-    background-color: white;
+    background-color: #1E293B;
+    border: 1px solid #334155;
     padding: 20px;
-    border-radius: 14px;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 16px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.4);
 }
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background-color: #F1F5F9;
+    background-color: #111827;
 }
 
 /* Buttons */
 div.stButton > button {
     background-color: #2563EB;
     color: white;
-    border-radius: 10px;
+    border-radius: 12px;
+    border: none;
     height: 3em;
     font-size: 16px;
     font-weight: 600;
 }
 
-/* Tables */
-thead tr th {
-    font-size: 16px !important;
+/* Inputs */
+div[data-baseweb="select"] {
+    border-radius: 10px;
 }
 
-/* General text */
+/* Tables */
+thead tr th {
+    font-size: 15px !important;
+}
+
 p, label {
     font-size: 16px !important;
 }
